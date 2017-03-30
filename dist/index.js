@@ -87,6 +87,19 @@ var Dropdown = function (_Component) {
       }
     }
   }, {
+    key: 'hasValue',
+    value: function hasValue() {
+      var options = this.props.options;
+      var selected = this.state.selected;
+
+      var selectedValue = selected.value || selected.label || selected;
+
+      return options.findIndex(function (option) {
+        var value = option.value || option.label || option;
+        return value === selectedValue;
+      }) >= 0;
+    }
+  }, {
     key: 'setValue',
     value: function setValue(value, label) {
       var newState = {
@@ -184,7 +197,7 @@ var Dropdown = function (_Component) {
       var baseClassName = this.props.baseClassName;
 
       var placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
-      var placeholderClass = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, baseClassName + '-placeholder', true), _defineProperty(_classNames2, 'has-value', !!placeHolderValue), _classNames2));
+      var placeholderClass = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, baseClassName + '-placeholder', true), _defineProperty(_classNames2, 'has-value', this.hasValue()), _classNames2));
       var value = _react2.default.createElement(
         'div',
         { className: placeholderClass },
@@ -198,7 +211,7 @@ var Dropdown = function (_Component) {
 
       var dropdownClass = (0, _classnames2.default)((_classNames3 = {}, _defineProperty(_classNames3, baseClassName + '-root', true), _defineProperty(_classNames3, 'is-open', this.state.isOpen), _classNames3));
 
-      var controlClass = (0, _classnames2.default)((_classNames4 = {}, _defineProperty(_classNames4, baseClassName + '-control', true), _defineProperty(_classNames4, baseClassName + '-disabled', this.props.disabled), _defineProperty(_classNames4, 'has-value', !!placeHolderValue), _classNames4));
+      var controlClass = (0, _classnames2.default)((_classNames4 = {}, _defineProperty(_classNames4, baseClassName + '-control', true), _defineProperty(_classNames4, baseClassName + '-disabled', this.props.disabled), _defineProperty(_classNames4, 'has-value', this.hasValue()), _classNames4));
 
       return _react2.default.createElement(
         'div',

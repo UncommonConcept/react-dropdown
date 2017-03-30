@@ -50,6 +50,17 @@ class Dropdown extends Component {
     }
   }
 
+  hasValue () {
+    const { options } = this.props
+    const { selected } = this.state
+    const selectedValue = selected.value || selected.label || selected
+
+    return options.findIndex((option) => {
+      const value = option.value || option.label || option
+      return value === selectedValue
+    }) >= 0;
+  }
+
   setValue (value, label) {
     const newState = {
       selected: {
@@ -123,7 +134,7 @@ class Dropdown extends Component {
   render () {
     const { baseClassName } = this.props
     const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
-    const placeholderClass = classNames({ [`${baseClassName}-placeholder`]: true, 'has-value': !!placeHolderValue });
+    const placeholderClass = classNames({ [`${baseClassName}-placeholder`]: true, 'has-value': this.hasValue() });
     const value = (<div className={placeholderClass}>{placeHolderValue}</div>)
     const menu = this.state.isOpen ? <div className={`${baseClassName}-menu`}>{this.buildMenu()}</div> : null
 
@@ -135,7 +146,7 @@ class Dropdown extends Component {
     const controlClass = classNames({
       [`${baseClassName}-control`]: true,
       [`${baseClassName}-disabled`]: this.props.disabled,
-      'has-value': !!placeHolderValue
+      'has-value': this.hasValue()
     });
 
     return (

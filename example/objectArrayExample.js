@@ -5,7 +5,7 @@ class ObjectArrayExample extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      selected: { value: 'two', label: 'Two'}
+      selected: null //{ value: 'two', label: 'Two'}
     }
     this._onSelect = this._onSelect.bind(this)
   }
@@ -34,7 +34,7 @@ class ObjectArrayExample extends Component {
     ]
 
     const defaultOption = this.state.selected
-    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label
+    const placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected ? this.state.selected.label : ''
 
     return (
       <section>
