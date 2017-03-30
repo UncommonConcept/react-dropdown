@@ -179,15 +179,16 @@ var Dropdown = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _classNames2;
+      var _classNames2, _classNames3;
 
       var baseClassName = this.props.baseClassName;
 
       var disabledClass = this.props.disabled ? baseClassName + '-disabled' : '';
       var placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
+      var placeholderClass = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, baseClassName + '-placeholder', true), _defineProperty(_classNames2, 'has-value', !!placeHolderValue), _classNames2));
       var value = _react2.default.createElement(
         'div',
-        { className: baseClassName + '-placeholder' },
+        { className: placeholderClass },
         placeHolderValue
       );
       var menu = this.state.isOpen ? _react2.default.createElement(
@@ -196,7 +197,7 @@ var Dropdown = function (_Component) {
         this.buildMenu()
       ) : null;
 
-      var dropdownClass = (0, _classnames2.default)((_classNames2 = {}, _defineProperty(_classNames2, baseClassName + '-root', true), _defineProperty(_classNames2, 'is-open', this.state.isOpen), _classNames2));
+      var dropdownClass = (0, _classnames2.default)((_classNames3 = {}, _defineProperty(_classNames3, baseClassName + '-root', true), _defineProperty(_classNames3, 'is-open', this.state.isOpen), _classNames3));
 
       return _react2.default.createElement(
         'div',
