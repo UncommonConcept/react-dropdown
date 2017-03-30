@@ -111,10 +111,14 @@ var Dropdown = function (_Component) {
     value: function renderOption(option) {
       var _classNames;
 
-      var optionClass = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, this.props.baseClassName + '-option', true), _defineProperty(_classNames, 'is-selected', option === this.state.selected), _classNames));
-
       var value = option.value || option.label || option;
       var label = option.label || option.value || option;
+
+      var selected = this.state.selected;
+
+      var selectedValue = selected.value || selected.label || selected;
+
+      var optionClass = (0, _classnames2.default)((_classNames = {}, _defineProperty(_classNames, this.props.baseClassName + '-option', true), _defineProperty(_classNames, 'is-selected', value === selectedValue), _classNames));
 
       return _react2.default.createElement(
         'div',
@@ -179,7 +183,7 @@ var Dropdown = function (_Component) {
 
       var baseClassName = this.props.baseClassName;
 
-      var disabledClass = this.props.disabled ? 'Dropdown-disabled' : '';
+      var disabledClass = this.props.disabled ? baseClassName + '-disabled' : '';
       var placeHolderValue = typeof this.state.selected === 'string' ? this.state.selected : this.state.selected.label;
       var value = _react2.default.createElement(
         'div',
@@ -210,6 +214,15 @@ var Dropdown = function (_Component) {
 
   return Dropdown;
 }(_react.Component);
+
+Dropdown.propTypes = {
+  baseClassName: _react2.default.PropTypes.string,
+  placeholder: _react2.default.PropTypes.string,
+  options: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.arrayOf(_react2.default.PropTypes.string), _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.object)]),
+  value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.object]),
+  disabled: _react2.default.PropTypes.bool,
+  onChange: _react2.default.PropTypes.func
+};
 
 Dropdown.defaultProps = { baseClassName: 'Dropdown' };
 exports.default = Dropdown;
